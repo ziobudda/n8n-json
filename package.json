@@ -1,0 +1,31 @@
+{
+  "name": "n8n-nodes-json-storage",
+  "version": "0.1.6",
+  "description": "n8n node for storing and retrieving key-value pairs in a JSON file",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "ZioBuddaLabs"
+  },
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "echo 'Nothing to build'"
+  },
+  "files": [
+    "nodes/**/*",
+    "dist/**/*",
+    "index.js"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "nodes/JsonStorage/jsonStorage.node.js"
+    ]
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
