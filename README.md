@@ -61,12 +61,15 @@ Output format (key not found):
 
 Follow these steps to install this node in your n8n instance:
 
-1. Go to the directory of your n8n installation
-2. Run the following command:
+1. git clone ...
+2. npm pack
+3. upload or copy in your n8n installation user  ".n8n/custom" directory
+   For example if your user is www-data this directory will be: ~www-data/.n8n/custom
+4. Run the following command:
    ```
    npm install n8n-nodes-json-storage
    ```
-3. Restart n8n
+5. Restart n8n
 
 ## Usage Examples
 
