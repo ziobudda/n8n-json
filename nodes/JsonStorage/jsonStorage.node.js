@@ -7,7 +7,7 @@ const os = require('os');
 class JsonStorage {
     constructor() {
         // Versione del nodo - aggiornare quando si fanno modifiche
-        this.nodeVersion = '0.1.6';
+        this.nodeVersion = '0.1.7';
         
         // Otteniamo il percorso corrente
         const currentDir = process.cwd();
@@ -44,10 +44,15 @@ class JsonStorage {
                             value: 'read',
                             description: 'Read a value by key from the JSON file',
                         },
+                        {
+                            name: 'Delete',
+                            value: 'delete',
+                            description: 'Delete a key-value pair from the JSON file',
+                        },
                     ],
                     default: 'save',
                 },
-                // Proprietà per l'operazione "save" e "read"
+                // Proprietà per l'operazione "save", "read" e "delete"
                 {
                     displayName: 'Key',
                     name: 'key',
@@ -55,11 +60,11 @@ class JsonStorage {
                     required: true,
                     displayOptions: {
                         show: {
-                            operation: ['save', 'read'],
+                            operation: ['save', 'read', 'delete'],
                         },
                     },
                     default: '',
-                    description: 'The key to save or retrieve',
+                    description: 'The key to save, retrieve or delete',
                 },
                 // Proprietà solo per l'operazione "save"
                 {
@@ -165,6 +170,37 @@ class JsonStorage {
                                 success: false,
                                 key,
                                 value: "",
+                            },
+                        });
+                    }
+                }
+            } else if (operation === 'delete') {
+                // Implementazione diretta per delete
+                for (let i = 0; i < items.length; i++) {
+                    const key = this.getNodeParameter('key', i);
+                    
+                    if (storage[key] !== undefined) {
+                        // Eliminiamo la chiave dal file JSON
+                        delete storage[key];
+                        
+                        // Scriviamo i dati aggiornati su file
+                        fs.writeFileSync(filePath, JSON.stringify(storage, null, 2));
+                        
+                        returnData.push({
+                            json: {
+                                success: true,
+                                key,
+                                deleted: true,
+                            },
+                        });
+                    } else {
+                        // Se la chiave non esiste, restituiamo un messaggio di errore
+                        returnData.push({
+                            json: {
+                                success: false,
+                                key,
+                                deleted: false,
+                                message: "Key not found",
                             },
                         });
                     }

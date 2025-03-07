@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-json-storage",
-  "version": "0.1.6",
-  "description": "n8n node for storing and retrieving key-value pairs in a JSON file",
+  "version": "0.1.7",
+  "description": "n8n node for storing, retrieving and deleting key-value pairs in a JSON file",
   "keywords": [
     "n8n-community-node-package"
   ],

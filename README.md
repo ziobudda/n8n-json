@@ -1,11 +1,12 @@
 # n8n-nodes-json-storage
 
-This is an n8n community node for storing and retrieving key-value pairs in a JSON file.
+This is an n8n community node for storing, retrieving and deleting key-value pairs in a JSON file.
 
 ## Features
 
 - Save key-value pairs in a JSON file
 - Read values by key from the JSON file
+- Delete key-value pairs from the JSON file
 - Values are stored in base64 format for security
 - Simple and easy to use
 - Custom file path support
@@ -57,6 +58,33 @@ Output format (key not found):
 }
 ```
 
+### Delete
+
+Deletes a key-value pair from the JSON file.
+
+Parameters:
+- **Key**: The key to delete
+- **File Path**: Full path to the JSON file where data is stored
+
+Output format (key found and deleted):
+```json
+{
+  "success": true,
+  "key": "your-key",
+  "deleted": true
+}
+```
+
+Output format (key not found):
+```json
+{
+  "success": false,
+  "key": "your-key",
+  "deleted": false,
+  "message": "Key not found"
+}
+```
+
 ## Installation
 
 Follow these steps to install this node in your n8n instance:
@@ -88,6 +116,15 @@ Follow these steps to install this node in your n8n instance:
 2. Add a "JSON Storage" node
 3. Select the "Read" operation
 4. Enter the key to retrieve
+5. Ensure the file path matches the one used for saving
+6. Execute the node
+
+### Delete a value
+
+1. Create a new workflow
+2. Add a "JSON Storage" node
+3. Select the "Delete" operation
+4. Enter the key to delete
 5. Ensure the file path matches the one used for saving
 6. Execute the node
 
@@ -147,6 +184,7 @@ For n8n nodes, the safest approach is either using inline implementations or exp
 
 ## Version History
 
+- 0.1.7 - Added delete operation to remove key-value pairs from the JSON file
 - 0.1.6 - Standardized JSON output format for both save and read operations
 - 0.1.5 - Simplified read output when key is not found
 - 0.1.4 - Fixed "this.readOperation is not a function" error by implementing functions inline
